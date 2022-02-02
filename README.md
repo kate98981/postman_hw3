@@ -243,21 +243,6 @@ var cur_id = pm.environment.get("Cur_ID")
 
 ## /curr_byn
 ### 7. {{url}}/curr_byn
-req.
-POST
-auth_token
-curr_code: int
-
-Resp.
-{
-    "Cur_Abbreviation": str
-    "Cur_ID": int,
-    "Cur_Name": str,
-    "Cur_OfficialRate": float,
-    "Cur_Scale": int,
-    "Date": str
-}
-
 Тесты:
 1) Статус код 200
 ```
