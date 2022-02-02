@@ -1,10 +1,6 @@
 # postman_hw3
 ## /login
 ### 1. необходимо залогиниться
-```
-var token = pm.response.json().token;
-pm.environment.set("token", token);
-```
 ===================
 ## /user_info
 ### 2. {{url}}/user_info
