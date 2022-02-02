@@ -1,7 +1,6 @@
 # postman_hw3
 ## /login
 ### 1. необходимо залогиниться
-===================
 ## /user_info
 ### 2. {{url}}/user_info
 Тесты:
@@ -62,7 +61,6 @@ pm.test("correct coefficient = 4", function(){
 var newSalary = res.person.u_salary_1_5_year
 pm.environment.set("newSalary", newSalary)
 ```
-===================
 ## /new_data
 ### 3. {{url}}/new_data
 Тесты:
@@ -123,7 +121,6 @@ pm.test("salary[2] > salary[0] and salary[2] > salary[1]", function(){
     pm.expect(Number(res.salary[2])).to.greaterThan(Number(res.salary[1]))
 })
 ```
-===================
 ## /test_pet_info
 ### 4. {{url}}/test_pet_info
 Тесты:
@@ -161,7 +158,6 @@ pm.test("weight.coef = 2.5", function(){
     pm.expect(Number(req.weight) * 2.5).to.eql(res.daily_sleep)
 })
 ```
-===================
 ## /get_test_user
 ### 5. {{url}}/get_test_user
 Тесты:
@@ -227,7 +223,6 @@ pm.test("age from res = age from req", function(){
     pm.expect(Number(res.age)).to.eql(Number(req.age))
 })
 ```
-===================
 ## /currency
 ### 6. {{url}}/currency
 Тесты:
@@ -246,7 +241,6 @@ pm.environment.set("Cur_ID", res[ran].Cur_ID)
 var cur_id = pm.environment.get("Cur_ID")
 ```
 
-===================
 ## /curr_byn
 ### 7. {{url}}/curr_byn
 req.
@@ -290,7 +284,6 @@ pm.test("json is valid", function(){
     pm.response.to.have.jsonSchema(schema);
 })
 ```
-===================
 ## ***
 ### {{url}}/currency
 1) получить список валют
@@ -345,4 +338,3 @@ for(let i = 0; i < arr_len; i++){
     });
 }
 ```
-===================
