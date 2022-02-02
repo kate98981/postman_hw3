@@ -1,10 +1,6 @@
 # postman_hw3
 ## /login
 ### 1. необходимо залогиниться
-POST
-{{url}}/login
-login : str (кроме /)
-password : str
 ```
 var token = pm.response.json().token;
 pm.environment.set("token", token);
@@ -12,22 +8,6 @@ pm.environment.set("token", token);
 ===================
 ## /user_info
 ### 2. {{url}}/user_info
-req. (RAW JSON)
-POST
-age: int
-salary: int
-name: str
-auth_token
-
-
-resp.
-{'start_qa_salary':salary,
- 'qa_salary_after_6_months': salary * 2,
- 'qa_salary_after_12_months': salary * 2.9,
- 'person': {'u_name':[user_name, salary, age],
-                                'u_age':age,
-                                'u_salary_1.5_year': salary * 4}
-                                }
 Тесты:
 1) Статус код 200
 ```
@@ -89,18 +69,6 @@ pm.environment.set("newSalary", newSalary)
 ===================
 ## /new_data
 ### 3. {{url}}/new_data
-req.
-POST
-age: int
-salary: int
-name: str
-auth_token
-
-Resp.
-{'name':name,
-  'age': int(age),
-  'salary': [salary, str(salary*2), str(salary*3)]}
-
 Тесты:
 1) Статус код 200
 ```
@@ -162,21 +130,6 @@ pm.test("salary[2] > salary[0] and salary[2] > salary[1]", function(){
 ===================
 ## /test_pet_info
 ### 4. {{url}}/test_pet_info
-req.
-POST
-age: int
-weight: int
-name: str
-auth_token
-
-
-Resp.
-{'name': name,
- 'age': age,
- 'daily_food':weight * 0.012,
- 'daily_sleep': weight * 2.5}
-
-
 Тесты:
 1) Статус код 200
 ```
@@ -215,21 +168,6 @@ pm.test("weight.coef = 2.5", function(){
 ===================
 ## /get_test_user
 ### 5. {{url}}/get_test_user
-req.
-POST
-age: int
-salary: int
-name: str
-auth_token
-
-Resp.
-{'name': name,
- 'age':age,
- 'salary': salary,
- 'family':{'children':[['Alex', 24],['Kate', 12]],
- 'u_salary_1.5_year': salary * 4}
-  }
-
 Тесты:
 1) Статус код 200
 ```
@@ -296,23 +234,6 @@ pm.test("age from res = age from req", function(){
 ===================
 ## /currency
 ### 6. {{url}}/currency
-req.
-POST
-auth_token
-
-Resp. Передаётся список массив объектов.
-[
-{"Cur_Abbreviation": str,
- "Cur_ID": int,
- "Cur_Name": str
-}
-…
-{"Cur_Abbreviation": str,
- "Cur_ID": int,
- "Cur_Name": str
-}
-]
-
 Тесты:
 1) Можете взять любой объект из присланного списка, используйте js random.
 ```
@@ -384,7 +305,7 @@ var res = pm.response.json()
 3) в каждой итерации отправлять запрос на сервер для получения курса каждой валюты
 4) если возвращается 500 код, переходим к следующей итреации
 5) если получаем 200 код, проверяем response json на наличие поля "Cur_OfficialRate"
-6) если поле есть, пишем в консоль инфу про фалюту в виде response
+6) если поле есть, пишем в консоль инфу про валюту в виде response
 {
     "Cur_Abbreviation": str
     "Cur_ID": int,
