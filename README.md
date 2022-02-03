@@ -9,7 +9,7 @@
 pm.test("Status code is 200", function(){
     pm.response.to.have.status(200);
 });
-```
+```js
 2) Проверка структуры json в ответе.
 ```
 const schema = {
@@ -41,7 +41,7 @@ const schema = {
 pm.test("Schema is valid", function(){
     pm.response.to.have.jsonSchema(schema)
 });
-```
+```js
 3) В ответе указаны коэффициенты умножения salary, напишите тесты по проверке правильности результата перемножения на коэффициент.
 ```
 var res = pm.response.json();
@@ -55,12 +55,12 @@ pm.test("correct coefficient = 2.9", function(){
 pm.test("correct coefficient = 4", function(){
     pm.expect(Number(salary) * 4).to.eql(res.person.u_salary_1_5_year)
 })
-```
+```js
 4) Достать значение из поля 'u_salary_1.5_year' и передать в поле salary запроса {{url}}/get_test_user
 ```
 var newSalary = res.person.u_salary_1_5_year
 pm.environment.set("newSalary", newSalary)
-```
+```js
 ## /new_data
 ### 3. {{url}}/new_data
 Тесты:
@@ -69,7 +69,7 @@ pm.environment.set("newSalary", newSalary)
 pm.test("Status is 200 OK", function(){
     pm.response.to.have.status(200)
 })
-```
+```js
 2) Проверка структуры json в ответе.
 ```
 var schema = {
@@ -96,12 +96,12 @@ var schema = {
       ]
     }
   },
-  "required": ["age","name","salary"]
+  "additionalProperties": false
 }
 pm.test("Json is valid", function(){
     pm.response.to.have.jsonSchema(schema)
 })
-```
+```js
 3) В ответе указаны коэффициенты умножения salary, напишите тесты по проверке правильности результата перемножения на коэффициент.
 ```
 var salary = pm.environment.get("salary")
@@ -113,14 +113,14 @@ pm.test("correct coefficient = 2", function(){
 pm.test("correct coefficient = 3", function(){
     pm.expect(Number(salary) * 3).to.eql(Number(res.salary[2]))
 })
-```
+```js
 4) проверить, что 2-й элемент массива salary больше 1-го и 0-го
 ```
 pm.test("salary[2] > salary[0] and salary[2] > salary[1]", function(){
     pm.expect(Number(res.salary[2])).to.greaterThan(res.salary[0])
     pm.expect(Number(res.salary[2])).to.greaterThan(Number(res.salary[1]))
 })
-```
+```js
 ## /test_pet_info
 ### 4. {{url}}/test_pet_info
 Тесты:
@@ -129,7 +129,7 @@ pm.test("salary[2] > salary[0] and salary[2] > salary[1]", function(){
 pm.test("Status is 200 OK", function(){
     pm.response.to.have.status(200)
 })
-```
+```js
 2) Проверка структуры json в ответе.
 ```
 var schema = {
@@ -140,13 +140,13 @@ var schema = {
         "daily_sleep": {"type": "number"},
         "name": {"type": "string"}
     },
-    "required": ["age","daily_food","daily_sleep","name"]
+    "additionalProperties": false
 }
 
 pm.test("Json is valid", function(){
     pm.response.to.have.jsonSchema(schema)
 })
-```
+```js
 3) В ответе указаны коэффициенты умножения weight, напишите тесты по проверке правильности результата перемножения на коэффициент.
 ```
 var req = request.data
@@ -157,7 +157,7 @@ pm.test("weight.coef = 0.012", function(){
 pm.test("weight.coef = 2.5", function(){
     pm.expect(Number(req.weight) * 2.5).to.eql(res.daily_sleep)
 })
-```
+```js
 ## /get_test_user
 ### 5. {{url}}/get_test_user
 Тесты:
@@ -166,7 +166,7 @@ pm.test("weight.coef = 2.5", function(){
 pm.test("Status is 200 OK", function(){
     pm.response.to.have.status(200)
 })
-```
+```js
 2) Проверка структуры json в ответе.
 ```
 var schema = {
@@ -197,32 +197,32 @@ var schema = {
         },
         "u_salary_1_5_year": {"type": "integer"}
       },
-      "required": ["children","u_salary_1_5_year"]
+      "additionalProperties": false
     },
     "name": {"type": "string"},
     "salary": {"type": "integer"}
     },
-    "required": ["age","family","name","salary"]
+    "additionalProperties": false
 }
 
 pm.test("Json is valid", function(){
     pm.response.to.have.jsonSchema(schema)
 })
-```
+```js
 3) Проверить что занчение поля name = значению переменной name из окружения
 ```
 var res = pm.response.json()
 pm.test("Name = name from environment", function(){
     pm.expect(res.name).to.eql(pm.environment.get("name"))
 })
-```
+```js
 4) Проверить что занчение поля age в ответе соответсвует отправленному в запросе значению поля age
 ```
 var req = request.data;
 pm.test("age from res = age from req", function(){
     pm.expect(Number(res.age)).to.eql(Number(req.age))
 })
-```
+```js
 ## /currency
 ### 6. {{url}}/currency
 Тесты:
@@ -235,11 +235,11 @@ var min = Math.ceil(0);
 var max = Math.floor(arr_len)
 var ran = Math.floor(Math.random() * (max - min)) + min;
 pm.environment.set("Cur_ID", res[ran].Cur_ID)
-```
+```js
 В объекте возьмите Cur_ID и передать через окружение в следующий запрос.
 ```
 var cur_id = pm.environment.get("Cur_ID")
-```
+```js
 
 ## /curr_byn
 ### 7. {{url}}/curr_byn
@@ -249,7 +249,7 @@ var cur_id = pm.environment.get("Cur_ID")
 pm.test("status is 200 OK", function(){
     pm.response.to.have.status == 200
 });
-```
+```js
 2) Проверка структуры json в ответе.
 ```
 var schema = {
@@ -262,19 +262,19 @@ var schema = {
     "Cur_Scale": {"type": "integer"},
     "Date": {"type": "string"}
     },
-    "required": ["Cur_Abbreviation","Cur_ID","Cur_Name","Cur_OfficialRate","Cur_Scale","Date"]
+    "additionalProperties": false
 }
 
 pm.test("json is valid", function(){
     pm.response.to.have.jsonSchema(schema);
 })
-```
+```js
 ## ***
 ### {{url}}/currency
 1) получить список валют
 ```
 var res = pm.response.json()
-```
+```js
 2) итерировать список валют
 3) в каждой итерации отправлять запрос на сервер для получения курса каждой валюты
 4) если возвращается 500 код, переходим к следующей итреации
@@ -322,4 +322,4 @@ for(let i = 0; i < arr_len; i++){
         }
     });
 }
-```
+```js
